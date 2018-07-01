@@ -1,0 +1,60 @@
+---
+title: "Progress Report"
+author: "D Garrett"
+date: "`r format(Sys.Date())`"
+output:  github_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This report summarises my progress on the HarvardX Data Science programme.
+  
+```{r loading-libs, message=FALSE, echo=FALSE}
+library(tidyverse)
+```
+
+  
+```{r, echo=FALSE}
+totals <- c(100,100,100,100,100)
+courses <- c("PH125.1x","PH125.2x","PH125.3x","PH125.4x","PH125.5x")
+titles <- c("'R Basics'","'Visualization'","'Probability'","'Inference and Modeling'","'Productivity Tools'")
+df <- data.frame(total=totals, course=courses, title=titles)
+```
+
+## Programme overview
+This [edX](www.edx.org) programme covers key knowledge and skills for real-world data science tasks, using the R language and environment for statistical computing. I've completed the materials and assessments for five of the nine courses (the sixth begins shortly):
+
+1. `r titles[1]`
+: An introduction to working with data using R.
+2. `r titles[2]`
+: Fundamentals of data visualisation and exploratory analysis. Introduces distributions and the normal distribution, as well as a range of representations, from basic histograms, smooth densities, Q-Q and box plots, to more sophisticated graphics using ggplot2. Concludes with a case study illustrating the power of effective data visualisation, and some broad principles for this.
+3. `r titles[3]`
+: Important concepts in probability theory, including principles for discrete and continuous data, (non-)independent events, sampling models and the Central Limit Theorem, as well as running simple Monte Carlo simulations.
+4. `r titles[4]`
+: Key concepts such as estimates, confidence intervals and p-values, and applications of probability theory including basics of Bayesian statistics and data-driven approaches in predictive modelling.
+5. `r titles[5]`
+: An introduction to RStudio features, elementary use of the Unix command line for filesystem management, version control with Git and GitHub, and report creation with R Markdown.
+
+## Progress summary
+
+My average course total for the five so far, is: `r mean(totals)`%.
+
+### Totals by course
+
+```{r, echo=FALSE}
+df %>% knitr::kable(col.names = c("Total %","Course","Title"),align = c("c","l","l"))
+```
+
+
+```{r grades-by-course, echo=FALSE, fig.height=3, fig.width=5}
+df %>% ggplot(aes(course, total)) +
+  geom_bar(width = 0.5, stat = "identity", fill = "#56B4E9", color = "#009E73") +
+  xlab("Course") +
+  ylab("Total %") +
+  theme(axis.text.x = element_text(angle=45, hjust=1))
+```
+
